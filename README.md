@@ -1,4 +1,4 @@
-# mines-anima
+# mines-image
 
 ComfyUI image workflows for **Anima** models. Each workflow is one settings node with the prompt and the settings you change, a saved result and a guide. Everything else is inside a subgraph.
 
