@@ -1,45 +1,34 @@
 # mines-anima
 
-ComfyUI image workflows for **Anima** models. Each one is a single settings node with the prompt and the settings you change, a saved result and a guide; everything else is inside the subgraph.
+ComfyUI image workflows for **Anima** models. Each workflow is one settings node with the prompt and the settings you change, a saved result and a guide. Everything else is inside a subgraph.
 
-| Workflow | Makes |
+## Workflows
+
+| Workflow | What you get |
 |---|---|
 | **Mine's Anima** | Text to image, with optional hires fix, face detailer and hand detailer |
-| **Mine's Anima LLLite** | Image that follows a control image (picture, sketch or lineart) through the Anima LLLite, with the same hires fix and detailers |
-| **Mine's Anima Inpaint** | Redraws a masked area of a picture through the Anima LLLite inpainting model; the rest keeps its exact pixels |
+| **Mine's Anima LLLite** | An image that follows a control image (picture, sketch or lineart), with the same hires fix and detailers |
+| **Mine's Anima Inpaint** | Redraws a masked area of a picture. The rest keeps its exact pixels. |
 
-Each workflow has a **Guide** note with every setting and a test-then-render routine.
+## Requirements
+
+- **ComfyUI** with the Anima LLLite nodes built in. Tested on 0.45.4.
+- **[mines-pack](https://github.com/kuromatcha/mines-pack)**, this project's node pack. Every workflow needs it.
+- Three more node packs for the hires fix, the detailers and lineart extraction: see the [setup guide](docs/setup.md).
+
+Model files are not included.
 
 ## Quick start
 
-1. Install the node packs and models below.
+1. Follow the [setup guide](docs/setup.md): node packs and models.
 2. Drag a file from [`workflows/`](workflows) into ComfyUI.
-3. Write the prompt and run. For the first runs, turn hires fix and the detailers off.
+3. Pick your **model** and a **lora** on the settings node, write the prompt and run. For the first runs, turn hires fix and the detailers off.
 
-## Node packs
+## Docs
 
-| Pack | Used by | Install |
-|---|---|---|
-| **mines-pack** (*mine's pack*) | All: prompt, pick style, inpaint crop/stitch, settings-node layout | `git clone https://github.com/kuromatcha/mines-pack.git` into `ComfyUI/custom_nodes/` |
-| **ComfyUI Impact Pack** and **Impact Subpack** | Anima, LLLite: face and hand detailers | ComfyUI-Manager |
-| **SesquiLSR** | Anima, LLLite: hires fix latent upscale | https://github.com/LoganBooker/SesquiLSR |
-| **comfyui_controlnet_aux** | LLLite: lineart extraction | ComfyUI-Manager |
+| | |
+|---|---|
+| [Setup](docs/setup.md) | Node packs, model downloads, first run |
+| [Workflows](docs/workflows.md) | Every setting of each workflow, the values inside the subgraph, the test-then-render routine |
 
-The LLLite nodes (Model Patch Loader, Anima LLLite Apply) are part of ComfyUI itself.
-
-## Models
-
-| File | Folder | Used by |
-|---|---|---|
-| An Anima checkpoint, e.g. `anima-base-v1.0.safetensors` | `models/diffusion_models` | All |
-| `qwen_3_06b_base.safetensors` | `models/text_encoders` | All |
-| `qwen_image_vae.safetensors` | `models/vae` | All |
-| `anima-lllite-any-test-like-v2.safetensors` | `models/model_patches` | LLLite |
-| `anima-lllite-inpainting-v2.safetensors` | `models/model_patches` | Inpaint |
-| `segm/Anzhc Face seg 640 v4 y11n.pt` | `models/ultralytics/segm` | Anima, LLLite (face) |
-| `bbox/hand_yolov8s.pt` | `models/ultralytics/bbox` | Anima, LLLite (hands) |
-| `sam_vit_b_01ec64.pth` | `models/sams` | Anima, LLLite (hands) |
-
-A LoRA is optional: pick one on the settings node, or set **lora strength** to 0.
-
-Model files are not included.
+Each workflow also has a **Guide** note on the canvas with the short version.
