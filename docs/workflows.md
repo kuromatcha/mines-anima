@@ -92,6 +92,10 @@ Two sources, picked with **use saved mask** on the settings node:
 - Cover the whole thing you replace and a little around it.
 - Running without a painted mask stops with *The mask is empty*.
 
+### Redrawn part
+
+*Redrawn part* shows the redrawn cut: the masked area with its surroundings, at the size it was redrawn, before it is blended back. To keep it, right-click it → **Save Image**. It is a plain picture, for reuse in an image editor (an expression pasted onto another picture, say). The workflow does not load it back, and it does not follow a new pose: on a picture with another pose, repaint the mask and redraw from the prompt.
+
 ### Prompt
 
 - **quality**, **style** (artist tags) and **positive prompt** are joined in that order; empty ones are skipped.
@@ -125,3 +129,4 @@ Two sources, picked with **use saved mask** on the settings node:
 2. Run again for another seed. Wrong shape: change the prompt. Visible seam: more blend edge or context.
 3. For the next area, load the result as the image and paint again.
 4. To redraw the same area on another picture, save the mask from *Mask preview* and use it as *Saved mask*.
+5. To keep the new part itself, save *Redrawn part*.
