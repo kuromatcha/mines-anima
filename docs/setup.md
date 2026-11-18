@@ -9,7 +9,7 @@ You only need the parts for the workflows you want. The **Needed by** columns sa
 
 ## 1. Install ComfyUI
 
-Use a current ComfyUI. The LLLite nodes (*Model Patch Loader*, *Anima LLLite Apply*) are part of ComfyUI itself, so an old version shows them as missing.
+Use a current ComfyUI. The LLLite nodes (*Model Patch Loader*, *Anima LLLite Apply*) are part of ComfyUI itself, so an old version shows them as missing. So is the *If/Else Switch* that picks the inpaint mask.
 
 Tested on ComfyUI 0.45.4 (Comfy Desktop, PyTorch 2.12.1 + CUDA 13.0) with an RTX 5060 Ti 16 GB.
 
@@ -68,7 +68,7 @@ A LoRA is optional, but the **lora** field must name a file you have. The workfl
 
 1. Start ComfyUI and drag a file from [`workflows/`](../workflows) onto the canvas. No red "missing node" boxes should show. If some do, a node pack from step 2 is missing.
 2. On the settings node, pick a **lora** (see above), and your **model** if it is not the base checkpoint.
-3. **Mine's Anima:** write the prompt, or run the example prompt. **LLLite:** also load a control image. **Inpaint:** load a picture, right-click it → **Open in MaskEditor**, paint the area to redraw and save. The image loaders are saved with ComfyUI's own `example.png`.
+3. **Mine's Anima:** write the prompt, or run the example prompt. **LLLite:** also load a control image. **Inpaint:** load a picture, right-click it → **Open in MaskEditor**, paint the area to redraw and save, or turn on **use mask file** and pick a saved mask on *Mask file*. The image loaders are saved with ComfyUI's own `example.png`.
 4. Turn **hires fix**, **face detailer** and **hand detailer** off for the first runs, then run.
 5. The picture is saved by the **Result** node. Each stage's picture is kept in the *Previews* group inside the subgraph.
 

@@ -8,7 +8,7 @@ ComfyUI image workflows for **Anima** models. Each workflow is one settings node
 |---|---|
 | **Mine's Anima** | Text to image, with optional hires fix, face detailer and hand detailer |
 | **Mine's Anima LLLite** | An image that follows a control image (picture, sketch or lineart), with the same hires fix and detailers |
-| **Mine's Anima Inpaint** | Redraws a masked area of a picture. The rest keeps its exact pixels. |
+| **Mine's Anima Inpaint** | Redraws a masked area of a picture. The rest keeps its exact pixels. Paint the mask or load a saved one. |
 
 ## Requirements
 

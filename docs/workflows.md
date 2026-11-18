@@ -80,7 +80,15 @@ Redraws a masked area. The area is cut out with its surroundings, redrawn at ful
 
 ### Mask
 
-- Right-click the image → **Open in MaskEditor**, paint the area to redraw, save.
+Two sources, picked with **use mask file** on the settings node:
+
+| use mask file | Mask comes from |
+|---|---|
+| **off** | The mask painted on *Image*: right-click it → **Open in MaskEditor**, paint the area to redraw, save. |
+| on | *Mask file*, a saved mask image. White = redrawn. Channel **red** for a black-and-white mask, **alpha** for an image whose redrawn area is transparent. A mask of another size is stretched to the picture. |
+
+- *Mask preview* shows the mask the run used, white on black. To keep a painted mask, right-click the preview → **Save Image**. Next time upload that file on *Mask file* (channel red) and turn **use mask file** on.
+- *Mask file* must name an existing image even while **use mask file** is off; it is then not loaded. The workflow is saved with `example.png` there.
 - Cover the whole thing you replace and a little around it.
 - Running without a painted mask stops with *The mask is empty*.
 
@@ -95,6 +103,7 @@ Redraws a masked area. The area is cut out with its surroundings, redrawn at ful
 
 | Setting | Saved value | Notes |
 |---|---|---|
+| use mask file | **off** | See [Mask](#mask). |
 | model | | The checkpoint the picture was made with. The LLLite was trained on anima-base-v1.0; finetunes work. |
 | megapixels | **1** | Size the cut is redrawn at. Up to 2.3 for a large area. |
 | context | **2** | Size of the cut as a multiple of the masked area. Higher matches the picture better; lower gives more detail. Small masks get at least 256 px. |
@@ -115,3 +124,4 @@ Redraws a masked area. The area is cut out with its surroundings, redrawn at ful
 1. Paint the mask, write the prompt, run.
 2. Run again for another seed. Wrong shape: change the prompt. Visible seam: more blend edge or context.
 3. For the next area, load the result as the image and paint again.
+4. To redraw the same area on another picture, save the mask from *Mask preview* and use it as *Mask file*.
