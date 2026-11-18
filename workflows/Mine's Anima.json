@@ -244,14 +244,14 @@
         "previewExposures": []
       },
       "widgets_values": [
-        "masterpiece, best quality, ",
-        "@firstsan, @dishwasher1910",
-        "@firstsan, @dishwasher1910",
-        "1boy, solo, middle-aged man, tall, short hair, black hair, hair between eyes, blue eyes, (bags under eyes:0.7), oversized khaki jacket, black shirt, jeans, black sneakers, full body, multiple views, white background.\n\nLeft view: standing, arms crossed, looking at viewer\nRight view: walking, hand in pocket, looking down",
-        "worst quality, low quality, score_1, score_2, score_3, artist name, jpeg artifacts, lowres, censor, ",
-        "oneObsessionAnima_v40.safetensors",
-        "@firstsan anime_base_1.0.safetensors",
-        1,
+        "masterpiece, best quality, newest",
+        "",
+        "",
+        "1girl, solo, long hair, silver hair, blue eyes, white sundress, straw hat, standing, looking at viewer, smile, flower field, blue sky, sunlight",
+        "worst quality, low quality, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres",
+        "anima-base-v1.0.safetensors",
+        "your_lora.safetensors",
+        0,
         1024,
         1024,
         1,
@@ -269,14 +269,14 @@
         1
       ],
       "widgets_values_named": {
-        "quality": "masterpiece, best quality, ",
-        "style_1": "@firstsan, @dishwasher1910",
-        "style_2": "@firstsan, @dishwasher1910",
-        "prompt": "1boy, solo, middle-aged man, tall, short hair, black hair, hair between eyes, blue eyes, (bags under eyes:0.7), oversized khaki jacket, black shirt, jeans, black sneakers, full body, multiple views, white background.\n\nLeft view: standing, arms crossed, looking at viewer\nRight view: walking, hand in pocket, looking down",
-        "negative_prompt": "worst quality, low quality, score_1, score_2, score_3, artist name, jpeg artifacts, lowres, censor, ",
-        "unet_name": "oneObsessionAnima_v40.safetensors",
-        "lora_name": "@firstsan anime_base_1.0.safetensors",
-        "strength_model": 1,
+        "quality": "masterpiece, best quality, newest",
+        "style_1": "",
+        "style_2": "",
+        "prompt": "1girl, solo, long hair, silver hair, blue eyes, white sundress, straw hat, standing, looking at viewer, smile, flower field, blue sky, sunlight",
+        "negative_prompt": "worst quality, low quality, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres",
+        "unet_name": "anima-base-v1.0.safetensors",
+        "lora_name": "your_lora.safetensors",
+        "strength_model": 0,
         "width": 1024,
         "height": 1024,
         "batch_size": 1,
@@ -788,11 +788,11 @@
               "Node name for S&R": "UNETLoader"
             },
             "widgets_values": [
-              "oneObsessionAnima_v40.safetensors",
+              "anima-base-v1.0.safetensors",
               "default"
             ],
             "widgets_values_named": {
-              "unet_name": "miaomiaoHarem_anima16.safetensors",
+              "unet_name": "anima-base-v1.0.safetensors",
               "weight_dtype": "default"
             },
             "color": "#432",
@@ -901,11 +901,11 @@
               "Node name for S&R": "LoraLoaderModelOnly"
             },
             "widgets_values": [
-              "@firstsan anime_base_1.0.safetensors",
-              1
+              "your_lora.safetensors",
+              0
             ],
             "widgets_values_named": {
-              "lora_name": "@firstsan anime_base_1.0.safetensors",
+              "lora_name": "your_lora.safetensors",
               "strength_model": 0
             }
           },
@@ -1250,20 +1250,20 @@
               "Node name for S&R": "PromptSectionsCond"
             },
             "widgets_values": [
-              "masterpiece, best quality, ",
-              "@firstsan, @dishwasher1910",
-              "@firstsan, @dishwasher1910",
+              "masterpiece, best quality, newest",
               "",
-              "1boy, solo, middle-aged man, tall, short hair, black hair, hair between eyes, blue eyes, (bags under eyes:0.7), oversized khaki jacket, black shirt, jeans, black sneakers, full body, multiple views, white background.\n\nLeft view: standing, arms crossed, looking at viewer\nRight view: walking, hand in pocket, looking down",
-              "worst quality, low quality, score_1, score_2, score_3, artist name, jpeg artifacts, lowres, censor, "
+              "",
+              "",
+              "1girl, solo, long hair, silver hair, blue eyes, white sundress, straw hat, standing, looking at viewer, smile, flower field, blue sky, sunlight",
+              "worst quality, low quality, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres"
             ],
             "widgets_values_named": {
-              "quality": "masterpiece, best quality, newest,",
-              "style_1": "@omone_hokoma_agm,",
+              "quality": "masterpiece, best quality, newest",
+              "style_1": "",
               "style_2": "",
               "style_3": "",
-              "prompt": "1girl, solo, Blue eyes, Yellow blonde hair, blunt bangs, long side locks, small closed mouth, White elbow-length gloves. sitting, knee up, looking at viewer, head tilt, closed mouth, dark background, ponytail, armpit, small chests,\n\nround eyes looking straight at the viewer.\n\na blue rose at the ear.\n\nWhite choker with a small white ribbon at the side. \n\nBlack halter night dress with a high neckline, closed fitted black bodice covering the chest, bare shoulders, deep blue skirt with a large deep blue bow at the side of the waist.\n\nBlack high heels with ankle straps.\n\nRight arm resting on her raised right knee, left hand reaching down to adjust the strap of her high heel.\n\nsimple blurry background of indoor night mansion.",
-              "negative_prompt": "worst quality, low quality, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, censor, shiny skin, shiny clothes, shiny hair, lace pattern, dust, skirt cover thigh"
+              "prompt": "1girl, solo, long hair, silver hair, blue eyes, white sundress, straw hat, standing, looking at viewer, smile, flower field, blue sky, sunlight",
+              "negative_prompt": "worst quality, low quality, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres"
             },
             "color": "#232",
             "bgcolor": "#353"

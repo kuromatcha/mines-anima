@@ -38,7 +38,7 @@ Folders are inside `ComfyUI/models/`.
 | `text_encoders/` | `qwen_3_06b_base.safetensors` | 1.2 GB | same repo → `split_files/text_encoders/` |
 | `vae/` | `qwen_image_vae.safetensors` | 0.25 GB | same repo → `split_files/vae/` |
 
-Anima finetunes work too. The workflows are saved with the checkpoint they were last used with; pick yours on the settings node.
+The workflows are saved with `anima-base-v1.0.safetensors`. Anima finetunes work too: pick yours on the settings node.
 
 ### LLLite and Inpaint
 
@@ -59,7 +59,7 @@ Download all three, also if you keep a detailer switched off. ComfyUI checks eve
 
 ### LoRA
 
-A LoRA is optional, but the **lora** field must name a file you have. The workflows are saved with the name of a LoRA that is not included, and ComfyUI refuses to run while that file is missing, even at **lora strength** 0.
+A LoRA is optional, but the **lora** field must name a file you have. The workflows are saved with the placeholder `your_lora.safetensors` at strength 0, and ComfyUI refuses to run while the named file is missing, even at **lora strength** 0.
 
 - With a LoRA: pick it on the settings node and set **lora strength**.
 - Without one: pick any LoRA file you have and leave **lora strength** at 0. If you have no LoRA file at all, open the subgraph and bypass *Load LoRA* (select it, Ctrl+B).
@@ -67,8 +67,8 @@ A LoRA is optional, but the **lora** field must name a file you have. The workfl
 ## 4. First run
 
 1. Start ComfyUI and drag a file from [`workflows/`](../workflows) onto the canvas. No red "missing node" boxes should show. If some do, a node pack from step 2 is missing.
-2. On the settings node, pick your **model** and a **lora** (see above).
-3. **Mine's Anima:** write the prompt. **LLLite:** also load a control image. **Inpaint:** load a picture, right-click it → **Open in MaskEditor**, paint the area to redraw and save.
+2. On the settings node, pick a **lora** (see above), and your **model** if it is not the base checkpoint.
+3. **Mine's Anima:** write the prompt, or run the example prompt. **LLLite:** also load a control image. **Inpaint:** load a picture, right-click it → **Open in MaskEditor**, paint the area to redraw and save. The image loaders are saved with ComfyUI's own `example.png`.
 4. Turn **hires fix**, **face detailer** and **hand detailer** off for the first runs, then run.
 5. The picture is saved by the **Result** node. Each stage's picture is kept in the *Previews* group inside the subgraph.
 

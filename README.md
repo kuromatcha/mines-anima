@@ -22,7 +22,7 @@ Model files are not included.
 
 1. Follow the [setup guide](docs/setup.md): node packs and models.
 2. Drag a file from [`workflows/`](workflows) into ComfyUI.
-3. Pick your **model** and a **lora** on the settings node, write the prompt and run. For the first runs, turn hires fix and the detailers off.
+3. Pick a **lora** on the settings node (any file you have; strength 0 keeps it off), write the prompt and run. For the first runs, turn hires fix and the detailers off.
 
 ## Docs
 
