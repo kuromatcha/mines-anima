@@ -896,7 +896,7 @@
                 ]
               }
             ],
-            "title": "Load LoRA (strength 0 = off)",
+            "title": "Load LoRA",
             "properties": {
               "Node name for S&R": "LoraLoaderModelOnly"
             },
