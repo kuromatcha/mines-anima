@@ -112,6 +112,22 @@ Two sources, picked with **use saved mask** on the settings node:
 | control strength | **1** | How strongly the LLLite ties the new part to its surroundings. 0.7–0.9 is freer. |
 | denoise | **1** | 1 replaces the area. 0.5–0.7 keeps the shapes under the mask and fixes details (hands, faces). |
 
+### Face expressions
+
+To change only the expression on a face, mask the face and use these instead of the saved values:
+
+| Setting | Value |
+|---|---|
+| context | **3** |
+| denoise | **0.3** |
+| megapixels | **1** |
+| control strength | **1** |
+
+- Start the positive prompt with `face focus`, then the expression: `face focus, brown eyes, looking at the viewer, light smile`.
+- 0.3 keeps the face and changes the expression. 0.4 gives a stronger expression; higher drifts away from the original face.
+- Keep megapixels at 1. At 1.5 mouths came out wobbly.
+- Strong wording brings sweat drops, gritted teeth and wide mouths. Keep it mild: `light blush`, `closed mouth`, `light smile`.
+
 ## Routine
 
 **Anima and LLLite**
