@@ -5,9 +5,10 @@ Setting names match the settings node. Values in **bold** are what the workflows
 - [Mine's Anima](#mines-anima)
 - [Mine's Anima LLLite](#mines-anima-lllite)
 - [Mine's Anima Inpaint](#mines-anima-inpaint)
+- [Mine's Cutout](#mines-cutout)
 - [Routine](#routine)
 
-## Shared by all three
+## Shared by the three Anima workflows
 
 | Setting | Notes |
 |---|---|
@@ -127,6 +128,26 @@ To change only the expression on a face, mask the face and use these instead of 
 - 0.3 keeps the face and changes the expression. 0.4 gives a stronger expression; higher drifts away from the original face.
 - Keep megapixels at 1. At 1.5 mouths came out wobbly.
 - Strong wording brings sweat drops, gritted teeth and wide mouths. Keep it mild: `light blush`, `closed mouth`, `light smile`.
+
+## Mine's Cutout
+
+Cuts the character out of an anime or illustration picture. The picture is upscaled 4x, the background removal model finds the character on the upscaled picture, and **Result** saves it as a transparent PNG at 4x size.
+
+### Settings
+
+| Setting | Saved value | Notes |
+|---|---|---|
+| upscale model | **4x_IllustrationJaNai_V1_DAT2_190k** | ESRGAN 135k is faster and a little softer. See [setup](setup.md#cutout) for the licences. |
+| model | **RMBG-2.0** | Also BEN2, BEN and INSPYRENET. RMBG-2.0 is non-commercial only; BEN2 is free for commercial use. |
+| process res | **2048** | Width the model looks at, up to 2048. Lower uses less VRAM and gives rougher edges. |
+| sensitivity | **1** | Lower it if bits of background are left behind. |
+| mask offset | **-2** | Pixels. Negative trims the edge and removes halos and fringes; positive grows it and keeps the outer line art. |
+| mask blur | **0** | 1 smooths jagged edges. |
+| refine edges | **on** | Darkens the semi-transparent edge pixels slightly. Turn it off if the outline looks too dark. |
+
+- Inside the subgraph, the *Previews* group keeps the upscaled picture and the mask.
+- Invert, unload model and background (transparent or a solid colour) are on the *Remove background* node inside the subgraph.
+- One picture per run, about 40 seconds at 1248 × 1824 with the DAT2 upscaler. The result is 4992 × 7296.
 
 ## Routine
 

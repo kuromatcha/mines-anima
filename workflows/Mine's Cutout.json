@@ -1,0 +1,898 @@
+{
+  "id": "510f40aa-8ece-4c93-974e-5015211a1ab7",
+  "revision": 0,
+  "last_node_id": 4,
+  "last_link_id": 2,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "LoadImage",
+      "pos": [
+        0,
+        0
+      ],
+      "size": [
+        480,
+        960
+      ],
+      "flags": {
+        "pinned": true
+      },
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "image",
+          "name": "image",
+          "type": "COMBO",
+          "link": null,
+          "widget": {
+            "name": "image"
+          }
+        },
+        {
+          "localized_name": "upload",
+          "name": "upload",
+          "type": "IMAGEUPLOAD",
+          "link": null,
+          "widget": {
+            "name": "upload"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "IMAGE",
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            1
+          ]
+        },
+        {
+          "localized_name": "MASK",
+          "name": "MASK",
+          "type": "MASK",
+          "links": []
+        }
+      ],
+      "title": "Image",
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "example.png",
+        "image"
+      ]
+    },
+    {
+      "id": 2,
+      "type": "ae86fc73-c6e3-4168-9026-7f972d859bc8",
+      "pos": [
+        520,
+        0
+      ],
+      "size": [
+        640,
+        960
+      ],
+      "flags": {
+        "pinned": true
+      },
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "image",
+          "name": "image",
+          "type": "IMAGE",
+          "link": 1
+        },
+        {
+          "label": "upscale model",
+          "name": "model_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "model_name"
+          },
+          "link": null
+        },
+        {
+          "label": "model",
+          "name": "model",
+          "type": "COMBO",
+          "widget": {
+            "name": "model"
+          },
+          "link": null
+        },
+        {
+          "label": "process res",
+          "name": "process_res",
+          "type": "INT",
+          "widget": {
+            "name": "process_res"
+          },
+          "link": null
+        },
+        {
+          "label": "sensitivity",
+          "name": "sensitivity",
+          "type": "FLOAT",
+          "widget": {
+            "name": "sensitivity"
+          },
+          "link": null
+        },
+        {
+          "label": "mask offset",
+          "name": "mask_offset",
+          "type": "INT",
+          "widget": {
+            "name": "mask_offset"
+          },
+          "link": null
+        },
+        {
+          "label": "mask blur",
+          "name": "mask_blur",
+          "type": "INT",
+          "widget": {
+            "name": "mask_blur"
+          },
+          "link": null
+        },
+        {
+          "label": "refine edges",
+          "name": "refine_foreground",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "refine_foreground"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "label": "result",
+          "localized_name": "result",
+          "name": "result",
+          "type": "IMAGE",
+          "links": [
+            2
+          ]
+        }
+      ],
+      "title": "Mine's Cutout",
+      "properties": {
+        "previewExposures": []
+      },
+      "widgets_values": [
+        "4x_IllustrationJaNai_V1_DAT2_190k.pth",
+        "RMBG-2.0",
+        2048,
+        1,
+        -2,
+        0,
+        true
+      ]
+    },
+    {
+      "id": 3,
+      "type": "SaveImage",
+      "pos": [
+        1200,
+        0
+      ],
+      "size": [
+        480,
+        960
+      ],
+      "flags": {
+        "pinned": true
+      },
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "images",
+          "name": "images",
+          "type": "IMAGE",
+          "link": 2
+        },
+        {
+          "localized_name": "filename_prefix",
+          "name": "filename_prefix",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "filename_prefix"
+          }
+        }
+      ],
+      "outputs": [],
+      "title": "Result",
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "nobg/cutout"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "MarkdownNote",
+      "pos": [
+        1720,
+        0
+      ],
+      "size": [
+        560,
+        960
+      ],
+      "flags": {
+        "pinned": true
+      },
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Guide",
+      "properties": {},
+      "widgets_values": [
+        "# Guide\n\n## Models\n- Upscaler in `upscale_models/`: `4x_IllustrationJaNai_V1_DAT2_190k` (sharper, slower) or `4x_IllustrationJaNai_V1_ESRGAN_135k` (faster). Both are non-commercial (CC BY-NC-SA 4.0).\n- Background removal: downloaded into `models/RMBG/` the first time a **model** is used. **RMBG-2.0** is non-commercial only; **BEN2** is free for commercial use.\n\n## How it works\n1. **Image** is upscaled 4x.\n2. **model** finds the character on the upscaled picture and cuts it out.\n3. **Result** saves a transparent PNG at 4x size in `output/nobg/`.\n\n## Settings\n- **upscale model**: see Models.\n- **model**: RMBG-2.0 · BEN2 · BEN · INSPYRENET.\n- **process res** 2048: size the model looks at (max 2048). Lower = less VRAM, rougher edges.\n- **sensitivity** 1: lower it if bits of background are left behind.\n- **mask offset** -2: negative trims the edge (removes halos and fringes), positive grows it (keeps the outer line art).\n- **mask blur** 0: 1 smooths jagged edges.\n- **refine edges**: darkens the semi-transparent edge pixels slightly. Off if the outline looks too dark.\n\n## Previews\n- Inside the subgraph, the *Previews* group keeps the upscaled picture and the mask. *Result* has the cut-out.\n\n## Inside the subgraph\n- Invert, unload model, background (Alpha or a solid colour): the *Remove background* node.\n\n## Batch\n- One picture per run. For a folder, copy it into `input/` and queue one run per picture.\n\nNeeds ComfyUI-RMBG.\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      2,
+      0,
+      "IMAGE"
+    ],
+    [
+      2,
+      2,
+      0,
+      3,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "definitions": {
+    "subgraphs": [
+      {
+        "id": "ae86fc73-c6e3-4168-9026-7f972d859bc8",
+        "version": 1,
+        "state": {
+          "lastGroupId": 3,
+          "lastNodeId": 5,
+          "lastLinkId": 13,
+          "lastRerouteId": 0
+        },
+        "revision": 0,
+        "config": {},
+        "name": "Mine's Cutout",
+        "inputNode": {
+          "id": -10,
+          "bounding": [
+            -380,
+            0,
+            140,
+            188
+          ]
+        },
+        "outputNode": {
+          "id": -20,
+          "bounding": [
+            880,
+            0,
+            128,
+            68
+          ]
+        },
+        "inputs": [
+          {
+            "id": "26dfa696-1f5f-4d30-a1b5-668ff7954026",
+            "name": "image",
+            "type": "IMAGE",
+            "linkIds": [
+              1
+            ],
+            "localized_name": "image",
+            "label": "image",
+            "pos": [
+              -260,
+              24
+            ]
+          },
+          {
+            "id": "833780f0-fae7-4a85-ba1d-e1c6fc6e3a1b",
+            "name": "model_name",
+            "type": "COMBO",
+            "linkIds": [
+              2
+            ],
+            "localized_name": "model_name",
+            "label": "upscale model",
+            "pos": [
+              -260,
+              44
+            ]
+          },
+          {
+            "id": "e11779c6-78f1-4e59-aa70-8bdc66724098",
+            "name": "model",
+            "type": "COMBO",
+            "linkIds": [
+              3
+            ],
+            "localized_name": "model",
+            "label": "model",
+            "pos": [
+              -260,
+              64
+            ]
+          },
+          {
+            "id": "a7b6ff7f-72bf-475a-9717-81525b9c27c4",
+            "name": "process_res",
+            "type": "INT",
+            "linkIds": [
+              4
+            ],
+            "localized_name": "process_res",
+            "label": "process res",
+            "pos": [
+              -260,
+              84
+            ]
+          },
+          {
+            "id": "c5981adb-0ae7-45e2-91d1-bd844193963b",
+            "name": "sensitivity",
+            "type": "FLOAT",
+            "linkIds": [
+              5
+            ],
+            "localized_name": "sensitivity",
+            "label": "sensitivity",
+            "pos": [
+              -260,
+              104
+            ]
+          },
+          {
+            "id": "84913d67-52ec-4412-8ba7-a165a29b7eb1",
+            "name": "mask_offset",
+            "type": "INT",
+            "linkIds": [
+              6
+            ],
+            "localized_name": "mask_offset",
+            "label": "mask offset",
+            "pos": [
+              -260,
+              124
+            ]
+          },
+          {
+            "id": "e51e4a31-50fc-4af1-a0a1-902e834d9ecd",
+            "name": "mask_blur",
+            "type": "INT",
+            "linkIds": [
+              7
+            ],
+            "localized_name": "mask_blur",
+            "label": "mask blur",
+            "pos": [
+              -260,
+              144
+            ]
+          },
+          {
+            "id": "7dd7036b-68b1-452e-9fd8-772d81b3a084",
+            "name": "refine_foreground",
+            "type": "BOOLEAN",
+            "linkIds": [
+              8
+            ],
+            "localized_name": "refine_foreground",
+            "label": "refine edges",
+            "pos": [
+              -260,
+              164
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "id": "897a8671-da11-4c0a-a645-95af5533eef5",
+            "name": "result",
+            "type": "IMAGE",
+            "linkIds": [
+              13
+            ],
+            "localized_name": "result",
+            "label": "result",
+            "pos": [
+              904,
+              24
+            ]
+          }
+        ],
+        "widgets": [],
+        "nodes": [
+          {
+            "id": 1,
+            "type": "UpscaleModelLoader",
+            "pos": [
+              0,
+              0
+            ],
+            "size": [
+              380,
+              120
+            ],
+            "flags": {},
+            "order": 0,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "model_name",
+                "name": "model_name",
+                "type": "COMBO",
+                "link": 2,
+                "widget": {
+                  "name": "model_name"
+                }
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "UPSCALE_MODEL",
+                "name": "UPSCALE_MODEL",
+                "type": "UPSCALE_MODEL",
+                "links": [
+                  9
+                ]
+              }
+            ],
+            "title": "Load upscaler",
+            "properties": {
+              "Node name for S&R": "UpscaleModelLoader"
+            },
+            "widgets_values": [
+              "4x_IllustrationJaNai_V1_DAT2_190k.pth"
+            ],
+            "color": "#432",
+            "bgcolor": "#653"
+          },
+          {
+            "id": 2,
+            "type": "ImageUpscaleWithModel",
+            "pos": [
+              0,
+              180
+            ],
+            "size": [
+              380,
+              100
+            ],
+            "flags": {},
+            "order": 1,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "upscale_model",
+                "name": "upscale_model",
+                "type": "UPSCALE_MODEL",
+                "link": 9
+              },
+              {
+                "localized_name": "image",
+                "name": "image",
+                "type": "IMAGE",
+                "link": 1
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "IMAGE",
+                "name": "IMAGE",
+                "type": "IMAGE",
+                "links": [
+                  10,
+                  11
+                ]
+              }
+            ],
+            "title": "Upscale 4x",
+            "properties": {
+              "Node name for S&R": "ImageUpscaleWithModel"
+            },
+            "widgets_values": []
+          },
+          {
+            "id": 3,
+            "type": "RMBG",
+            "pos": [
+              440,
+              0
+            ],
+            "size": [
+              380,
+              420
+            ],
+            "flags": {},
+            "order": 2,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "image",
+                "name": "image",
+                "type": "IMAGE",
+                "link": 10
+              },
+              {
+                "localized_name": "model",
+                "name": "model",
+                "type": "COMBO",
+                "link": 3,
+                "widget": {
+                  "name": "model"
+                }
+              },
+              {
+                "localized_name": "sensitivity",
+                "name": "sensitivity",
+                "type": "FLOAT",
+                "link": 5,
+                "widget": {
+                  "name": "sensitivity"
+                }
+              },
+              {
+                "localized_name": "process_res",
+                "name": "process_res",
+                "type": "INT",
+                "link": 4,
+                "widget": {
+                  "name": "process_res"
+                }
+              },
+              {
+                "localized_name": "mask_blur",
+                "name": "mask_blur",
+                "type": "INT",
+                "link": 7,
+                "widget": {
+                  "name": "mask_blur"
+                }
+              },
+              {
+                "localized_name": "mask_offset",
+                "name": "mask_offset",
+                "type": "INT",
+                "link": 6,
+                "widget": {
+                  "name": "mask_offset"
+                }
+              },
+              {
+                "localized_name": "invert_output",
+                "name": "invert_output",
+                "type": "BOOLEAN",
+                "link": null,
+                "widget": {
+                  "name": "invert_output"
+                }
+              },
+              {
+                "localized_name": "refine_foreground",
+                "name": "refine_foreground",
+                "type": "BOOLEAN",
+                "link": 8,
+                "widget": {
+                  "name": "refine_foreground"
+                }
+              },
+              {
+                "localized_name": "unload_model",
+                "name": "unload_model",
+                "type": "BOOLEAN",
+                "link": null,
+                "widget": {
+                  "name": "unload_model"
+                }
+              },
+              {
+                "localized_name": "background",
+                "name": "background",
+                "type": "COMBO",
+                "link": null,
+                "widget": {
+                  "name": "background"
+                }
+              },
+              {
+                "localized_name": "background_color",
+                "name": "background_color",
+                "type": "COLORCODE",
+                "link": null,
+                "widget": {
+                  "name": "background_color"
+                }
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "IMAGE",
+                "name": "IMAGE",
+                "type": "IMAGE",
+                "links": [
+                  13
+                ]
+              },
+              {
+                "localized_name": "MASK",
+                "name": "MASK",
+                "type": "MASK",
+                "links": []
+              },
+              {
+                "localized_name": "MASK_IMAGE",
+                "name": "MASK_IMAGE",
+                "type": "IMAGE",
+                "links": [
+                  12
+                ]
+              }
+            ],
+            "title": "Remove background",
+            "properties": {
+              "Node name for S&R": "RMBG"
+            },
+            "widgets_values": [
+              "RMBG-2.0",
+              1,
+              2048,
+              0,
+              -2,
+              false,
+              true,
+              false,
+              "Alpha",
+              "#222222"
+            ],
+            "color": "#432",
+            "bgcolor": "#653"
+          },
+          {
+            "id": 4,
+            "type": "PreviewImage",
+            "pos": [
+              0,
+              -720
+            ],
+            "size": [
+              380,
+              520
+            ],
+            "flags": {},
+            "order": 3,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "images",
+                "name": "images",
+                "type": "IMAGE",
+                "link": 11
+              }
+            ],
+            "outputs": [],
+            "title": "Preview: upscaled",
+            "properties": {
+              "Node name for S&R": "PreviewImage"
+            },
+            "widgets_values": []
+          },
+          {
+            "id": 5,
+            "type": "PreviewImage",
+            "pos": [
+              440,
+              -720
+            ],
+            "size": [
+              380,
+              520
+            ],
+            "flags": {},
+            "order": 4,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "images",
+                "name": "images",
+                "type": "IMAGE",
+                "link": 12
+              }
+            ],
+            "outputs": [],
+            "title": "Preview: mask",
+            "properties": {
+              "Node name for S&R": "PreviewImage"
+            },
+            "widgets_values": []
+          }
+        ],
+        "groups": [
+          {
+            "id": 1,
+            "title": "Previews",
+            "bounding": [
+              -20,
+              -800,
+              860,
+              640
+            ],
+            "color": "#3f789e",
+            "flags": {}
+          },
+          {
+            "id": 2,
+            "title": "1 · Upscale",
+            "bounding": [
+              -20,
+              -80,
+              420,
+              400
+            ],
+            "color": "#3f789e",
+            "flags": {}
+          },
+          {
+            "id": 3,
+            "title": "2 · Remove background",
+            "bounding": [
+              420,
+              -80,
+              420,
+              520
+            ],
+            "color": "#3f789e",
+            "flags": {}
+          }
+        ],
+        "links": [
+          {
+            "id": 1,
+            "origin_id": -10,
+            "origin_slot": 0,
+            "target_id": 2,
+            "target_slot": 1,
+            "type": "IMAGE"
+          },
+          {
+            "id": 2,
+            "origin_id": -10,
+            "origin_slot": 1,
+            "target_id": 1,
+            "target_slot": 0,
+            "type": "COMBO"
+          },
+          {
+            "id": 3,
+            "origin_id": -10,
+            "origin_slot": 2,
+            "target_id": 3,
+            "target_slot": 1,
+            "type": "COMBO"
+          },
+          {
+            "id": 4,
+            "origin_id": -10,
+            "origin_slot": 3,
+            "target_id": 3,
+            "target_slot": 3,
+            "type": "INT"
+          },
+          {
+            "id": 5,
+            "origin_id": -10,
+            "origin_slot": 4,
+            "target_id": 3,
+            "target_slot": 2,
+            "type": "FLOAT"
+          },
+          {
+            "id": 6,
+            "origin_id": -10,
+            "origin_slot": 5,
+            "target_id": 3,
+            "target_slot": 5,
+            "type": "INT"
+          },
+          {
+            "id": 7,
+            "origin_id": -10,
+            "origin_slot": 6,
+            "target_id": 3,
+            "target_slot": 4,
+            "type": "INT"
+          },
+          {
+            "id": 8,
+            "origin_id": -10,
+            "origin_slot": 7,
+            "target_id": 3,
+            "target_slot": 7,
+            "type": "BOOLEAN"
+          },
+          {
+            "id": 9,
+            "origin_id": 1,
+            "origin_slot": 0,
+            "target_id": 2,
+            "target_slot": 0,
+            "type": "UPSCALE_MODEL"
+          },
+          {
+            "id": 10,
+            "origin_id": 2,
+            "origin_slot": 0,
+            "target_id": 3,
+            "target_slot": 0,
+            "type": "IMAGE"
+          },
+          {
+            "id": 11,
+            "origin_id": 2,
+            "origin_slot": 0,
+            "target_id": 4,
+            "target_slot": 0,
+            "type": "IMAGE"
+          },
+          {
+            "id": 12,
+            "origin_id": 3,
+            "origin_slot": 2,
+            "target_id": 5,
+            "target_slot": 0,
+            "type": "IMAGE"
+          },
+          {
+            "id": 13,
+            "origin_id": 3,
+            "origin_slot": 0,
+            "target_id": -20,
+            "target_slot": 0,
+            "type": "IMAGE"
+          }
+        ],
+        "extra": {
+          "workflowRendererVersion": "LG"
+        }
+      }
+    ]
+  },
+  "config": {},
+  "extra": {
+    "workflowRendererVersion": "LG",
+    "ds": {
+      "scale": 0.6,
+      "offset": [
+        80,
+        80
+      ]
+    }
+  },
+  "version": 0.4
+}
